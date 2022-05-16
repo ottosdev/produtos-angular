@@ -1,0 +1,68 @@
+<div
+  style="
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  "
+>
+  <mat-card style="width: 80vw">
+    <h2>Cadastrar produtos</h2>
+    <mat-divider style="margin-bottom: 1rem"></mat-divider>
+
+    <form
+      autocomplete="off"
+      novalidate
+      [formGroup]="cadastroForm"
+      (ngSubmit)="submit()"
+      (ngReset)="reset()"
+      style="
+        padding-top: 1rem;
+        width: 100%;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      "
+    >
+      <app-input-text
+        titulo="Nome"
+        [formGroup]="cadastroForm"
+        controlNome="nome"
+      ></app-input-text>
+
+      <app-input-date
+        titulo="Dt Compra"
+        [formGroup]="cadastroForm"
+        controlNome="dtCompra"
+      ></app-input-date>
+
+      <app-input-number
+        titulo="Preço"
+        [formGroup]="cadastroForm"
+        controlNome="preco"
+      ></app-input-number>
+
+      <mat-card-actions
+        style="display: flex; justify-content: flex-end; width: 51.2%"
+      >
+        <button
+          type="reset"
+          color="warn"
+          mat-raised-button
+          style="width: 100px"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          color="accent"
+          mat-raised-button
+          style="width: 100px"
+        >
+          Salvar
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

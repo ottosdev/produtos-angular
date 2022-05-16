@@ -1,0 +1,62 @@
+<mat-card
+  style="
+    margin: 2rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  "
+>
+  <form
+    [formGroup]="filtragem"
+    autocomplete="off"
+    novalidate
+    style="
+      padding-top: 1rem;
+      width: 100%;
+      flex-direction: column;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    "
+  >
+    <div>
+      <app-input-text
+        titulo="Pesquisar"
+        controlNome="pesquisa"
+        [formGroup]="filtragem"
+      ></app-input-text>
+    </div>
+  </form>
+</mat-card>
+<div
+  style="
+    margin: 2rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  "
+  infiniteScroll
+  (scrolled)="onScroll()"
+  *ngIf="produtos.length > 0; else semprodutos"
+>
+  <mat-card    style="width: 100vw; height: 20vh" *ngFor="let produto of produtos">
+    <mat-card-header>
+      <mat-card-title>{{ produto.nome }}</mat-card-title>
+    </mat-card-header>
+    <mat-divider style="margin-bottom: 1rem"></mat-divider>
+
+    <mat-card-content style="margin-top: 1rem">
+      <p>Data de compra: {{ produto.dtCompra | date: "dd/MM/yyyy" }}</p>
+      <p>Preço: {{ produto.preco || 'Nenhum preco foi adicionado' }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent">Abrir</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<ng-template #semprodutos>
+    <h1 style="text-align: center;">Sem nenhum produto registrado</h1>
+</ng-template>

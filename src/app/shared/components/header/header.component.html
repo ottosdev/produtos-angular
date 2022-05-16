@@ -1,0 +1,11 @@
+<mat-toolbar >
+  <span style="margin-right: 1rem;">Produtos</span>
+  <mat-list>
+    <mat-nav-list style="display: flex; gap: .2rem">
+      <a mat-list-item [routerLink]="['/produtos']">Listagem</a>
+      <a mat-list-item [routerLink]="['/produtos/cadastro']">Cadastro</a>
+   </mat-nav-list>
+  </mat-list>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
