@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CadastroComponent } from './modules/produto/cadastro/cadastro.component';
 import { ListagemComponent } from './modules/produto/listagem/listagem.component';
 import { ProdutoModule } from './modules/produto/produto.module';
+import { VisualizarProdutoComponent } from './modules/produto/visualizar-produto/visualizar-produto.component';
 
 const routes: Routes = [
   {
@@ -22,19 +23,19 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: CadastroComponent,
+            component: CadastroComponent
           },
-          // {
-          //   path: ':id',
-          //   component: CadastroFilmesComponent,
-          // },
-        ],
+          {
+            path: ':id',
+            component: CadastroComponent
+          }
+        ]
       },
-      // {
-      //   path: ':id',
-      //   component: VisualizarFilmesComponent,
-      //   pathMatch: 'full',
-      // },
+      {
+        path: ':id',
+        component: VisualizarProdutoComponent,
+        pathMatch: 'full',
+      },
     ],
   },
   { path: '**', redirectTo: 'produtos' },

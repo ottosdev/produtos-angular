@@ -6,9 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { CamposModule } from 'src/app/shared/components/campos/campos.module';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { VisualizarProdutoComponent } from './visualizar-produto/visualizar-produto.component';
 
 @NgModule({
-  declarations: [ListagemComponent, CadastroComponent],
+  declarations: [ListagemComponent, CadastroComponent, VisualizarProdutoComponent],
   imports: [
     CommonModule,
     MaterialModule,

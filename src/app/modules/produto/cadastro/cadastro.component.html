@@ -14,6 +14,7 @@
       autocomplete="off"
       novalidate
       [formGroup]="cadastroForm"
+      *ngIf="cadastroForm"
       (ngSubmit)="submit()"
       (ngReset)="reset()"
       style="

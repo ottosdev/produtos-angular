@@ -8,8 +8,6 @@ import { MaterialModule } from './shared/material/material.module';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './shared/components/alert/alert.component';
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,0 +1,16 @@
+<mat-list *ngIf="produto; else semregistro">
+  <mat-list-item> Nome: {{ produto.nome }} </mat-list-item>
+  <mat-list-item>
+    Data: {{ produto.dtCompra | date: "dd/MM/yyyy" }}
+  </mat-list-item>
+  <mat-list-item> Preço: {{ produto.preco }} </mat-list-item>
+</mat-list>
+
+<mat-card-actions style="display: flex; gap: 1rem; padding-left: 1rem">
+  <button color="warn" mat-raised-button (click)="editar()">Editar</button>
+  <button color="accent" mat-raised-button (click)="excluir()">Excluir</button>
+</mat-card-actions>
+
+<ng-template #semregistro>
+  <h1>Nenhum produto foi encontrado</h1>
+</ng-template>

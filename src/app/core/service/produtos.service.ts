@@ -9,15 +9,30 @@ const url = 'http://localhost:3000/produtos/';
   providedIn: 'root',
 })
 export class ProdutosService {
-  constructor(private http: HttpClient, private configService: ConfigParamsService) {}
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigParamsService
+  ) {}
 
   salvar(produto: Produto): Observable<Produto> {
     return this.http.post<Produto>(url, produto);
   }
 
   listar(config: ConfigParams): Observable<Produto[]> {
-   const configParams = this.configService.configurarParametros(config);
+    const configParams = this.configService.configurarParametros(config);
 
     return this.http.get<Produto[]>(url, { params: configParams });
+  }
+
+  visualizar(id: number): Observable<Produto> {
+    return this.http.get<Produto>(url + id);
+  }
+
+  excluir(id: number): Observable<void> {
+    return this.http.delete<void>(url + id);
+  }
+
+  editar(produto: Produto): Observable<Produto> {
+    return this.http.put<Produto>(url + produto.id, produto);
   }
 }

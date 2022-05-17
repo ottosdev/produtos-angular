@@ -4,6 +4,7 @@ import { ProdutosService } from 'src/app/core/service/produtos.service';
 import { ConfigParams } from 'src/app/shared/models/config-params';
 import { Produto } from 'src/app/shared/models/produto';
 import { debounceTime } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-listagem',
   templateUrl: './listagem.component.html',
@@ -17,7 +18,7 @@ export class ListagemComponent implements OnInit {
     limite: 4,
   };
 
-  constructor(private service: ProdutosService, private fb: FormBuilder) {}
+  constructor(private service: ProdutosService, private fb: FormBuilder, private router: Router) {}
 
   filtragem!: FormGroup;
 
@@ -57,5 +58,9 @@ export class ListagemComponent implements OnInit {
     this.config.pagina = 0;
     this.produtos = [];
     this.listarProdutos();
+  }
+
+  abrir(id: number) {
+    this.router.navigateByUrl('/produtos/' + id);
   }
 }
