@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutosService } from 'src/app/core/service/produtos.service';
@@ -11,24 +11,44 @@ import { Produto } from 'src/app/shared/models/produto';
   templateUrl: './visualizar-produto.component.html',
   styleUrls: ['./visualizar-produto.component.scss'],
 })
-export class VisualizarProdutoComponent implements OnInit {
+export class VisualizarProdutoComponent implements OnInit, OnDestroy {
   produto!: Produto;
+  segundo!: Produto;
+  pegarSession: string | null = '';
   idProduto!: number;
   constructor(
     private activatedRoute: ActivatedRoute,
     private produtosService: ProdutosService,
     public dialog: MatDialog,
     private router: Router
-  ) {}
+  ) {
+    const nav = this.router.getCurrentNavigation();
+    this.produto = nav?.extras.state?.['produto'];
+    this.pegarSession = sessionStorage.getItem('produto');
+
+  }
+  ngOnDestroy(): void {
+    sessionStorage.removeItem("produto")
+  }
 
   ngOnInit(): void {
-    this.idProduto = this.activatedRoute.snapshot.params['id'];
-    this.visualizar();
+    if (!this.produto) {
+      this.produto = this.pegarSession && JSON.parse(this.pegarSession);
+    } else {
+      sessionStorage.setItem('produto', JSON.stringify(this.produto));
+    }
+
+    // this.idProduto = this.activatedRoute.snapshot.params['id'];
+    // this.visualizar();
+  }
+
+  voltar() {
+    this.router.navigateByUrl('');
   }
 
   private visualizar(): void {
     this.produtosService
-      .visualizar(this.idProduto)
+      .visualizar(this.produto.id)
       .subscribe((res: Produto) => {
         this.produto = res;
       });
@@ -48,14 +68,13 @@ export class VisualizarProdutoComponent implements OnInit {
     dialogRef.afterClosed().subscribe((opcao: boolean) => {
       if (opcao) {
         this.produtosService.excluir(this.idProduto).subscribe(() => {
-          this.router.navigateByUrl("/produtos");
+          this.router.navigateByUrl('/produtos');
         });
       }
     });
   }
 
-
   editar() {
-    this.router.navigateByUrl("/produtos/cadastro/" + this.idProduto)
+    this.router.navigateByUrl('/produtos/cadastro/' + this.produto.id);
   }
 }

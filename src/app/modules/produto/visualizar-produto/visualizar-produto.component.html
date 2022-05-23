@@ -1,4 +1,5 @@
 <mat-list *ngIf="produto; else semregistro">
+  <a (click)="voltar()">Voltar</a>
   <mat-list-item> Nome: {{ produto.nome }} </mat-list-item>
   <mat-list-item>
     Data: {{ produto.dtCompra | date: "dd/MM/yyyy" }}

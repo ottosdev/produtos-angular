@@ -32,7 +32,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: ':id',
+        path: 'visualizar',
         component: VisualizarProdutoComponent,
         pathMatch: 'full',
       },

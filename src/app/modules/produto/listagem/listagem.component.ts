@@ -60,7 +60,9 @@ export class ListagemComponent implements OnInit {
     this.listarProdutos();
   }
 
-  abrir(id: number) {
-    this.router.navigateByUrl('/produtos/' + id);
+  abrir(produto: Produto) {
+    this.router.navigateByUrl('/produtos/visualizar', {
+      state: {produto: produto}
+    });
   }
 }
